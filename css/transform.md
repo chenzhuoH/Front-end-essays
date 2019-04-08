@@ -8,9 +8,9 @@
 ## 原理  
 matrix(a,b,c,d,e,f)  
 矩阵：  
-  a c e &nbsp;x&nbsp;&nbsp;&nbsp;&nbsp;ax + cy + e  
+  a c e &nbsp;x&nbsp;&nbsp;&nbsp;&nbsp; ax + cy + e  
   b d f · y  =  bx + by + f  
-  0 0 1 &nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;0 + 0 + 1  
+  0 0 1 &nbsp;1&nbsp;&nbsp;&nbsp;&nbsp; 0 + 0 + 1  
   
   ax + cy + e 变换后的横坐标  
   bx + by + f 变换后的纵坐标  
