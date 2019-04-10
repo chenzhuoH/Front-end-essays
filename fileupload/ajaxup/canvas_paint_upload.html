@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>简易画板，canvas图片上传</title>
+    <style>
+        input {
+            width: 30px;
+            height: 20px;
+            margin: 0 5px 10px;
+        }
+    </style>
+</head>
+
+<body style="background: #f3f0f0;">
+    <div style="width:500px;margin:100px auto 0">
+        <div>
+            <input type="image" id="clearBtn" src="images/delete.png">
+            <input type="image" id="penBtn" src="images/pen.png">
+            <input type="image" id="eraserBtn" src="images/eraser.png">
+        </div>
+        <canvas id="paintBox" width="500" height="300" style="background:white;"></canvas>
+    </div>
+    <script>
+        let oc = document.getElementById('paintBox');
+        let gd = oc.getContext('2d');
+
+        window.onload = function () {
+            paint();
+        }
+
+        let oClearBtn = document.getElementById('clearBtn');
+        oClearBtn.onclick = function () {
+            gd.beginPath();
+            gd.clearRect(0, 0, oc.width, oc.height);
+            paint();
+        }
+
+        let oEraserBtn = document.getElementById('eraserBtn');
+        oEraserBtn.onclick = function () {
+            oc.onmousedown = function (ev) {
+                clearCircular(ev.offsetX, ev.offsetY, 5, gd);
+                oc.onmousemove = function (ev) {
+                    clearCircular(ev.offsetX, ev.offsetY, 5, gd);
+                }
+                oc.onmouseup = function () {
+                    oc.onmousemove = null;
+                    oc.onmouseup = null;
+                }
+            }
+        }
+
+        let penBtn = document.getElementById('penBtn');
+        penBtn.onclick = function () {
+            paint();
+        }
+
+        function paint() {
+            oc.onmousedown = function (ev) {
+                let lastX = ev.offsetX;
+                let lastY = ev.offsetY;
+                oc.onmousemove = function (ev) {
+                    gd.moveTo(lastX, lastY);
+                    gd.lineTo(ev.offsetX, ev.offsetY);
+                    gd.stroke();
+                    lastX = ev.offsetX;
+                    lastY = ev.offsetY;
+                }
+                oc.onmouseup = function () {
+                    oc.onmousemove = null;
+                    oc.onmouseup = null;
+                }
+            }
+        }
+
+        let clearCircular = function (x, y, r, context) {
+            let step = 0.1;
+            clear(x, y, r);
+            function clear(x, y, radius) {
+                let rectWidth = radius - step;
+                let rectHeight = Math.sqrt(radius * radius - rectWidth * rectWidth);
+                let positionX = x - rectWidth;
+                let positionY = y - rectHeight;
+                if (step <= radius) {
+                    //console.log(positionX+', '+positionY);
+                    context.beginPath();
+                    context.clearRect(positionX, positionY, 2 * rectWidth, 2 * rectHeight);
+                    step += 0.1;
+                    clear(x, y, radius);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

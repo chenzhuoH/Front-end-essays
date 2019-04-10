@@ -1,0 +1,15 @@
+{
+  "name": "ajaxup",
+  "version": "1.0.0",
+  "description": "ajax_node_file_upload",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "zchen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "multer": "^1.4.1"
+  }
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+    <input type="file" id="file" multiple/>
+    <input type="button" id="upload" value="upload">
+    <script>
+        let file = document.getElementById('file');
+        let uploadBtn  = document.getElementById('upload');
+        uploadBtn.onclick = function () {
+            let xmr = new XMLHttpRequest();
+            xmr.open('POST','/upload',true);
+            let formData = new FormData();
+            Array.from(file.files).forEach(file =>{
+                formData.append('flie',file);
+            });
+            //formData.set('testFile',Array.from(file.files)[0]);
+            xmr.send(formData);
+            xmr.onreadystatechange = function () {
+                if(xmr.readyState === 4 && xmr.status === 200){
+                    alert('success');
+                } 
+              }
+        };
+    </script>
+</body>
+</html>
