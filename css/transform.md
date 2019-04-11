@@ -16,7 +16,7 @@ matrix(a,b,c,d,e,f)
   bx + by + f 变换后的纵坐标  
 1. translate(30px,30px) = matrix(1,0,0,1,30,30);  
 2. scale(x,y) = matrix(x,0,0,y,0,0);  
-3. scale(θdeg) = matrix(cosθ,sinθ,sinθ,cosθ,0,0)  
+3. rotate(θ) = matrix(cosθ,sinθ,-sinθ,cosθ,0,0)  
 4. skew(x + 'deg',y + 'deg') = matrix(1,tan x ,tan y,1,0,0)   
 # 3D变换  
 左手定则，大拇指指向要旋转的坐标轴方向，其余手指弯曲的方向即为旋转的方向
